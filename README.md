@@ -48,13 +48,13 @@ Seguindo o padrão arquitetural DDD, por isso, a aplicação foi dividida em qua
 Fiz um esboço básico com algumas classes para exemplificar a ideia e organizar o projeto.
 
 ### Security
-![Esboço das classes Security](./images/security.png)
+![Esboço das classes Security](readme/images/security.png)
 ### Customer
-![Esboço das classes Customer](./images/customer.png)
+![Esboço das classes Customer](readme/images/customer.png)
 ### Appointment
-![Esboço das classes Appointment](./images/appointment.png)
+![Esboço das classes Appointment](readme/images/appointment.png)
 ### Business
-![Esboço das classes Business](./images/business.png)
+![Esboço das classes Business](readme/images/business.png)
 
 ## Controle de qualidade
 Para assegurar ao máximo o controle de qualidade da aplicação, haverão branches para cada nova funcionalidade implementada. Só será feito o merge com a branch principal quando houver um cobrimento de testes aceitável. A maioria dos testes serão unitários, haverá alguns de integração e não tenho certeza se teremos algum E2E (talvez com Postman).

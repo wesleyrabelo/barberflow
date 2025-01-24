@@ -27,8 +27,12 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void deleteCustomer(Customer customer) {
-        customerRepository.delete(customer);
+    public void deleteCustomer(Long id) {
+        Customer saved = findById(id);
+        if(saved == null){
+            throw new RuntimeException();
+        }
+        customerRepository.deleteById(id);
     }
 
     @Override

@@ -6,6 +6,8 @@ import com.barberflow.barberflow.customer.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
@@ -22,26 +24,26 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer saveCustomer(Customer customer) {
-        return null;
+        return customerRepository.save(customer);
     }
 
     @Override
     public Customer updateCustomer(Customer customer) {
-        return null;
+        return customerRepository.save(customer);
     }
 
     @Override
     public void deleteCustomer(Customer customer) {
-
+        customerRepository.delete(customer);
     }
 
     @Override
     public Customer findById(Long id) {
-        return null;
+        return customerRepository.findById(id).orElse(null);
     }
 
     @Override
     public Customer findByEmail(String email) {
-        return null;
+        return customerRepository.findByEmail(email).orElse(null);
     }
 }

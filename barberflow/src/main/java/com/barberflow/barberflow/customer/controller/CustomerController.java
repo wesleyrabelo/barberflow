@@ -17,7 +17,28 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<Customer> registerCustomer(@RequestBody Customer customer){
+    public ResponseEntity<Customer> signupCustomer(@RequestBody Customer customer){
         return ResponseEntity.ok().body(customerService.saveCustomer(customer));
+    }
+
+    @PutMapping
+    public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer){
+        return ResponseEntity.ok().body(customerService.updateCustomer(customer));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCustomer(@PathVariable Long id){
+        customerService.deleteCustomer(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Customer> findById(@PathVariable Long id){
+        return ResponseEntity.ok().body(customerService.findById(id));
+    }
+
+    @GetMapping
+    public ResponseEntity<Customer> findByEmail(@RequestBody Customer customer){
+        return ResponseEntity.ok().body(customerService.findByEmail(email));
     }
 }

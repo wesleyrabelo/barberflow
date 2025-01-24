@@ -5,6 +5,9 @@ import com.barberflow.barberflow.customer.repository.CustomerRepository;
 import com.barberflow.barberflow.customer.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+// TO-DO:
+// Criar uma exceção personalizada para os metodos @deleteCustomer, @findById e @findByEmail.
+//
 
 @Service
 public class CustomerServiceImpl implements CustomerService {

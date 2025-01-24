@@ -13,10 +13,6 @@ public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
 
-    //Apesar da anotação @RequiredArgsContrutor do Lombok suportar o uso de @Autowired  é experimental.
-    //Mesmo que o Spring não precise da anotação @Autowired quando é apenas um campo no construtor,
-    //é bem provável que no futuro haja mais de um. Por isso dá escolha de explicitamente criar o
-    //construtor e colocar a @Autowired. Do contrário, bastaria adicionar @RequiredArgsConstructor.
     @Autowired
     public CustomerServiceImpl(CustomerRepository customerRepository){
         this.customerRepository = customerRepository;

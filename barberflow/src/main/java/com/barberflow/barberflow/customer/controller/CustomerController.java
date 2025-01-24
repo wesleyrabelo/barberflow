@@ -38,7 +38,7 @@ public class CustomerController {
     }
 
     @GetMapping
-    public ResponseEntity<Customer> findByEmail(@RequestBody Customer customer){
+    public ResponseEntity<Customer> findByEmail(@RequestBody String email){
         return ResponseEntity.ok().body(customerService.findByEmail(email));
     }
 }

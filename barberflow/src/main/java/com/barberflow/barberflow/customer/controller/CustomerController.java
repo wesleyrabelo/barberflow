@@ -1,7 +1,7 @@
 package com.barberflow.barberflow.customer.controller;
 
-import com.barberflow.barberflow.customer.dto.signup.CustomerSignupReceiveDto;
 import com.barberflow.barberflow.customer.dto.mapper.CustomerMapper;
+import com.barberflow.barberflow.customer.dto.signup.CustomerSignupReceiveDto;
 import com.barberflow.barberflow.customer.dto.signup.CustomerSignupResponseDto;
 import com.barberflow.barberflow.customer.entity.Customer;
 import com.barberflow.barberflow.customer.service.CustomerService;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 // Criar DTO,
 // Adicionar RestControllerAdvice
 // Pagination
+// Passar a parte de conversão de DTO para o customerService?
 
 @RestController
 @RequestMapping("/customer")
@@ -28,14 +29,14 @@ public class CustomerController {
 
     @PostMapping
     public ResponseEntity<CustomerSignupResponseDto> signupCustomer(@RequestBody CustomerSignupReceiveDto dto){
-        Customer customer = customerMapper.signupReceiveDtoToCustomer(dto);
+        Customer customer = customerMapper.customerReceiveDtoToCustomer(dto);
         Customer saved = customerService.saveCustomer(customer);
         return ResponseEntity.ok().body(customerMapper.customerToSignupResponseDto(saved));
     }
 
     @PutMapping
-    public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer){
-        return ResponseEntity.ok().body(customerService.updateCustomer(customer));
+    public ResponseEntity<Customer> updateCustomer(@PathVariable Long id, @RequestBody Customer customer){
+        return ResponseEntity.ok().body(customerService.updateCustomer(id, customer));
     }
 
     @DeleteMapping("/{id}")

@@ -5,7 +5,6 @@ public class CustomerSignupReceiveDto {
     private String email;
     private String password;
     private String phoneNumber;
-    //private List<Appointment> appointments;
 
     public CustomerSignupReceiveDto(String name, String email, String password, String phoneNumber) {
         this.name = name;

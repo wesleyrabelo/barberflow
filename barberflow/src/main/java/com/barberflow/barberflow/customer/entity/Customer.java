@@ -5,6 +5,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+//TO-DO:
+//  Adicionar as restricoes para cada campo
+//  Adicionar a data de criação da conta
+
 @Entity
 public class Customer {
     @Id

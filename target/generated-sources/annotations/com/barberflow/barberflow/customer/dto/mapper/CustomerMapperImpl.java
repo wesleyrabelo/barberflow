@@ -8,14 +8,14 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-01-31T14:25:50-0300",
+    date = "2025-01-31T14:54:25-0300",
     comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.5 (Oracle Corporation)"
 )
 @Component
 public class CustomerMapperImpl implements CustomerMapper {
 
     @Override
-    public Customer signupReceiveDtoToCustomer(CustomerSignupReceiveDto dto) {
+    public Customer customerReceiveDtoToCustomer(CustomerSignupReceiveDto dto) {
         if ( dto == null ) {
             return null;
         }

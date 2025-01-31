@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 @Mapper(componentModel = "spring")
 @Component
 public interface CustomerMapper {
-
-    Customer signupReceiveDtoToCustomer(CustomerSignupReceiveDto dto);
+    Customer customerReceiveDtoToCustomer(CustomerSignupReceiveDto dto);
     CustomerSignupResponseDto customerToSignupResponseDto(Customer customer);
 }

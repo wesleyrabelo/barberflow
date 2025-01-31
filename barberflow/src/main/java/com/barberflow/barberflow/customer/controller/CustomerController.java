@@ -1,6 +1,6 @@
 package com.barberflow.barberflow.customer.controller;
 
-import com.barberflow.barberflow.customer.dto.customer.CustomerSignupReceiveDto;
+import com.barberflow.barberflow.customer.dto.signup.CustomerSignupReceiveDto;
 import com.barberflow.barberflow.customer.dto.mapper.CustomerMapper;
 import com.barberflow.barberflow.customer.entity.Customer;
 import com.barberflow.barberflow.customer.service.CustomerService;
@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-//TO-DO : Criar DTOs, adicionar RestControllerAdvice
+//TO-DO :
+// Criar DTO,
+// Adicionar RestControllerAdvice
+// Pagination
 
 @RestController
 @RequestMapping("/customer")

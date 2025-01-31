@@ -2,6 +2,7 @@ package com.barberflow.barberflow.customer.controller;
 
 import com.barberflow.barberflow.customer.dto.signup.CustomerSignupReceiveDto;
 import com.barberflow.barberflow.customer.dto.mapper.CustomerMapper;
+import com.barberflow.barberflow.customer.dto.signup.CustomerSignupResponseDto;
 import com.barberflow.barberflow.customer.entity.Customer;
 import com.barberflow.barberflow.customer.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,10 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<Customer> signupCustomer(@RequestBody CustomerSignupReceiveDto dto){
-        Customer customer = customerMapper.signupDtoToCustomer(dto);
-        return ResponseEntity.ok().body(customerService.saveCustomer(customer));
+    public ResponseEntity<CustomerSignupResponseDto> signupCustomer(@RequestBody CustomerSignupReceiveDto dto){
+        Customer customer = customerMapper.signupReceiveDtoToCustomer(dto);
+        Customer saved = customerService.saveCustomer(customer);
+        return ResponseEntity.ok().body(customerMapper.customerToSignupResponseDto(saved));
     }
 
     @PutMapping

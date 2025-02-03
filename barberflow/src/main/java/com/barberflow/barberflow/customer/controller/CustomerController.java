@@ -1,6 +1,7 @@
 package com.barberflow.barberflow.customer.controller;
 
 import com.barberflow.barberflow.customer.dto.find.CustomerFindByIdResponseDto;
+import com.barberflow.barberflow.customer.dto.find.CustomerFindByNameResponseDto;
 import com.barberflow.barberflow.customer.dto.mapper.CustomerMapper;
 import com.barberflow.barberflow.customer.dto.signup.CustomerSignupReceiveDto;
 import com.barberflow.barberflow.customer.dto.signup.CustomerSignupResponseDto;
@@ -49,8 +50,8 @@ public class CustomerController {
         return ResponseEntity.ok().body(customerService.findById(id));
     }
 
-    @GetMapping
-    public ResponseEntity<Customer> findByEmail(@RequestBody String email){
-        return ResponseEntity.ok().body(customerService.findByEmail(email));
+    @GetMapping("/name/{name}")
+    public ResponseEntity<CustomerFindByNameResponseDto> findByName(@PathVariable String name){
+        return ResponseEntity.ok().body(customerService.findByName(name));
     }
 }

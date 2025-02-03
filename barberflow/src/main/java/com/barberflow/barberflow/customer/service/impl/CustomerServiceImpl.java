@@ -1,6 +1,7 @@
 package com.barberflow.barberflow.customer.service.impl;
 
 import com.barberflow.barberflow.customer.dto.find.CustomerFindByIdResponseDto;
+import com.barberflow.barberflow.customer.dto.find.CustomerFindByNameResponseDto;
 import com.barberflow.barberflow.customer.dto.mapper.CustomerMapper;
 import com.barberflow.barberflow.customer.dto.signup.CustomerSignupReceiveDto;
 import com.barberflow.barberflow.customer.dto.signup.CustomerSignupResponseDto;
@@ -59,8 +60,9 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer findByEmail(String email) {
-        return customerRepository.findByEmail(email).orElse(null);
+    public CustomerFindByNameResponseDto findByName(String name) {
+        Customer customer = customerRepository.findByName(name).orElse(null);
+        return mapper.customerToCustomerFindByNameResponseDto(customer);
     }
 
     private Customer internalFindById(Long id){

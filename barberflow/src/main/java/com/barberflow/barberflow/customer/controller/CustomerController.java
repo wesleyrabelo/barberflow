@@ -1,5 +1,6 @@
 package com.barberflow.barberflow.customer.controller;
 
+import com.barberflow.barberflow.customer.dto.find.CustomerFindByIdResponseDto;
 import com.barberflow.barberflow.customer.dto.mapper.CustomerMapper;
 import com.barberflow.barberflow.customer.dto.signup.CustomerSignupReceiveDto;
 import com.barberflow.barberflow.customer.dto.signup.CustomerSignupResponseDto;
@@ -44,7 +45,7 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Customer> findById(@PathVariable Long id){
+    public ResponseEntity<CustomerFindByIdResponseDto> findById(@PathVariable Long id){
         return ResponseEntity.ok().body(customerService.findById(id));
     }
 

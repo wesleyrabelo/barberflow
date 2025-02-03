@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 //TO-DO:
 //  Adicionar as restricoes para cada campo
 //  Adicionar a data de criação da conta
+//  Criar a classe Appointment
 
 @Entity
 public class Customer {

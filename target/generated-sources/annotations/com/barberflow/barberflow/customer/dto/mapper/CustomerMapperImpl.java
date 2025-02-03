@@ -1,5 +1,6 @@
 package com.barberflow.barberflow.customer.dto.mapper;
 
+import com.barberflow.barberflow.customer.dto.find.CustomerFindByIdResponseDto;
 import com.barberflow.barberflow.customer.dto.signup.CustomerSignupReceiveDto;
 import com.barberflow.barberflow.customer.dto.signup.CustomerSignupResponseDto;
 import com.barberflow.barberflow.customer.dto.update.CustomerUpdateReceiveDto;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-02-03T11:17:35-0300",
+    date = "2025-02-03T11:39:45-0300",
     comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.5 (Oracle Corporation)"
 )
 @Component
@@ -83,5 +84,21 @@ public class CustomerMapperImpl implements CustomerMapper {
         customerUpdateResponseDto.phoneNumber = customer.getPhoneNumber();
 
         return customerUpdateResponseDto;
+    }
+
+    @Override
+    public CustomerFindByIdResponseDto customerToCustomerFindByIdResponseDto(Customer customer) {
+        if ( customer == null ) {
+            return null;
+        }
+
+        CustomerFindByIdResponseDto customerFindByIdResponseDto = new CustomerFindByIdResponseDto();
+
+        customerFindByIdResponseDto.name = customer.getName();
+        customerFindByIdResponseDto.email = customer.getEmail();
+        customerFindByIdResponseDto.password = customer.getPassword();
+        customerFindByIdResponseDto.phoneNumber = customer.getPhoneNumber();
+
+        return customerFindByIdResponseDto;
     }
 }

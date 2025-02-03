@@ -20,12 +20,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/customer")
 public class CustomerController {
     private final CustomerService customerService;
-    private final CustomerMapper customerMapper;
 
     @Autowired
-    public CustomerController(CustomerService customerService, CustomerMapper customerMapper){
+    public CustomerController(CustomerService customerService){
         this.customerService = customerService;
-        this.customerMapper = customerMapper;
     }
 
     @PostMapping

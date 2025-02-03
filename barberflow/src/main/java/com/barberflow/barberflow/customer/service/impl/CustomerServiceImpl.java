@@ -1,5 +1,6 @@
 package com.barberflow.barberflow.customer.service.impl;
 
+import com.barberflow.barberflow.customer.dto.update.CustomerUpdateReceiveDto;
 import com.barberflow.barberflow.customer.entity.Customer;
 import com.barberflow.barberflow.customer.repository.CustomerRepository;
 import com.barberflow.barberflow.customer.service.CustomerService;
@@ -26,7 +27,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer updateCustomer(Long id, Customer customer) {
+    public Customer updateCustomer(Long id, CustomerUpdateReceiveDto dto) {
       return customerRepository.save(customer);
     }
 

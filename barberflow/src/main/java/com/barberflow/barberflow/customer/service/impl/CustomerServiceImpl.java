@@ -1,5 +1,6 @@
 package com.barberflow.barberflow.customer.service.impl;
 
+import com.barberflow.barberflow.customer.dto.mapper.CustomerMapper;
 import com.barberflow.barberflow.customer.dto.update.CustomerUpdateReceiveDto;
 import com.barberflow.barberflow.customer.entity.Customer;
 import com.barberflow.barberflow.customer.repository.CustomerRepository;
@@ -15,10 +16,12 @@ import org.springframework.stereotype.Service;
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final CustomerMapper mapper;
 
     @Autowired
-    public CustomerServiceImpl(CustomerRepository customerRepository){
+    public CustomerServiceImpl(CustomerRepository customerRepository, CustomerMapper mapper){
         this.customerRepository = customerRepository;
+        this.mapper = mapper;
     }
 
     @Override
@@ -28,8 +31,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer updateCustomer(Long id, CustomerUpdateReceiveDto dto) {
-      Customer saved = customerRepository.findById(id).orElse(null);
-      return customerRepository.save(saved);
+      Customer saved = findById(id);
+      Customer updated = mapper.updateCustomerFromDto(dto, saved);
+      return customerRepository.save(updated);
     }
 
     @Override

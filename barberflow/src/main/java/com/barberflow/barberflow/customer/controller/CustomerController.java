@@ -35,7 +35,7 @@ public class CustomerController {
         return ResponseEntity.ok().body(customerMapper.customerToSignupResponseDto(saved));
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity<Customer> updateCustomer(@PathVariable Long id, @RequestBody CustomerUpdateReceiveDto dto){
         return ResponseEntity.ok().body(customerService.updateCustomer(id, dto));
     }

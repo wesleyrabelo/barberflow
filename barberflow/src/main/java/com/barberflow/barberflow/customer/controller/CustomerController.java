@@ -28,9 +28,7 @@ public class CustomerController {
 
     @PostMapping
     public ResponseEntity<CustomerSignupResponseDto> signupCustomer(@RequestBody CustomerSignupReceiveDto dto){
-        Customer customer = customerMapper.customerReceiveDtoToCustomer(dto);
-        Customer saved = customerService.saveCustomer(customer);
-        return ResponseEntity.ok().body(customerMapper.customerToSignupResponseDto(saved));
+        return ResponseEntity.ok().body(customerService.saveCustomer(dto));
     }
 
     @PutMapping("/{id}")

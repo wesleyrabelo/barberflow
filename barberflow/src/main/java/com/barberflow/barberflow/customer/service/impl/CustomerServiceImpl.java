@@ -1,5 +1,6 @@
 package com.barberflow.barberflow.customer.service.impl;
 
+import com.barberflow.barberflow.customer.dto.find.CustomerFindByIdResponseDto;
 import com.barberflow.barberflow.customer.dto.mapper.CustomerMapper;
 import com.barberflow.barberflow.customer.dto.signup.CustomerSignupReceiveDto;
 import com.barberflow.barberflow.customer.dto.signup.CustomerSignupResponseDto;
@@ -13,7 +14,8 @@ import org.springframework.stereotype.Service;
 
 // TO-DO:
 //  Criar uma exceção personalizada para os metodos @deleteCustomer, @findById e @findByEmail.
-//  Criar a logica do metodo @updateCustomer
+//  Melhorar a logica do metodo @updateCustomer
+//  Verificar se criar o metodo internalFindById é uma boa ideia mesmo
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -36,7 +38,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerUpdateResponseDto updateCustomer(Long id, CustomerUpdateReceiveDto dto) {
-      Customer saved = findById(id);
+      Customer saved = internalFindById(id);
       Customer updated = mapper.updateCustomerFromDto(dto, saved);
       Customer customer = customerRepository.save(updated);
       return mapper.customerToUpdateResponseDto(customer);
@@ -44,19 +46,26 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void deleteCustomer(Long id) {
-        Customer saved = findById(id);
+        Customer saved = internalFindById(id);
         customerRepository.deleteById(id);
     }
 
     @Override
-    public Customer findById(Long id) {
-        return customerRepository.findById(id).orElseThrow(
+    public CustomerFindByIdResponseDto findById(Long id) {
+        Customer saved = customerRepository.findById(id).orElseThrow(
                 RuntimeException::new
         );
+        return mapper.customerToCustomerFindByIdResponseDto(saved);
     }
 
     @Override
     public Customer findByEmail(String email) {
         return customerRepository.findByEmail(email).orElse(null);
+    }
+
+    private Customer internalFindById(Long id){
+        return customerRepository.findById(id).orElseThrow(
+                RuntimeException::new
+        );
     }
 }

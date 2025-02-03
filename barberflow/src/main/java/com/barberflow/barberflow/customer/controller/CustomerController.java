@@ -3,6 +3,7 @@ package com.barberflow.barberflow.customer.controller;
 import com.barberflow.barberflow.customer.dto.mapper.CustomerMapper;
 import com.barberflow.barberflow.customer.dto.signup.CustomerSignupReceiveDto;
 import com.barberflow.barberflow.customer.dto.signup.CustomerSignupResponseDto;
+import com.barberflow.barberflow.customer.dto.update.CustomerUpdateReceiveDto;
 import com.barberflow.barberflow.customer.entity.Customer;
 import com.barberflow.barberflow.customer.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,8 @@ public class CustomerController {
     }
 
     @PutMapping
-    public ResponseEntity<Customer> updateCustomer(@PathVariable Long id, @RequestBody Customer customer){
-        return ResponseEntity.ok().body(customerService.updateCustomer(id, customer));
+    public ResponseEntity<Customer> updateCustomer(@PathVariable Long id, @RequestBody CustomerUpdateReceiveDto dto){
+        return ResponseEntity.ok().body(customerService.updateCustomer(id, dto));
     }
 
     @DeleteMapping("/{id}")

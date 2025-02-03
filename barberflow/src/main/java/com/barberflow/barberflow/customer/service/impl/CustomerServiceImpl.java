@@ -28,21 +28,21 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer updateCustomer(Long id, CustomerUpdateReceiveDto dto) {
-      return customerRepository.save(customer);
+      Customer saved = customerRepository.findById(id).orElse(null);
+      return customerRepository.save(saved);
     }
 
     @Override
     public void deleteCustomer(Long id) {
         Customer saved = findById(id);
-        if(saved == null){
-            throw new RuntimeException();
-        }
         customerRepository.deleteById(id);
     }
 
     @Override
     public Customer findById(Long id) {
-        return customerRepository.findById(id).orElse(null);
+        return customerRepository.findById(id).orElseThrow(
+                RuntimeException::new
+        );
     }
 
     @Override

@@ -5,9 +5,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.time.LocalDateTime;
+
 //TO-DO:
 //  Adicionar as restricoes para cada campo
-//  Adicionar a data de criação da conta
 //  Criar a classe Appointment
 
 @Entity
@@ -19,6 +20,7 @@ public class Customer {
     private String email;
     private String password;
     private String phoneNumber;
+    private LocalDateTime creationDate;
     //private List<Appointment> appointments;
 
     public Customer(){}
@@ -28,6 +30,7 @@ public class Customer {
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
+        this.creationDate = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -68,5 +71,9 @@ public class Customer {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
     }
 }

@@ -11,10 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-//TO-DO :
-// Pagination
-// Excecao ao tentar cadastrar um Customer que ja existe
-
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {

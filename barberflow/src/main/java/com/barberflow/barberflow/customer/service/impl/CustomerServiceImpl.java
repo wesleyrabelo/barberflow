@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 // TO-DO:
-//  Criar uma exceção personalizada para os metodos @deleteCustomer, @findById e @findByEmail.
 //  Melhorar a logica do metodo @updateCustomer
 //  Verificar se criar o metodo internalFindById é uma boa ideia mesmo
 

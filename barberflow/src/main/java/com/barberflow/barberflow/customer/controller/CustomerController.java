@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 //TO-DO :
-// Adicionar RestControllerAdvice
 // Pagination
 
 @RestController

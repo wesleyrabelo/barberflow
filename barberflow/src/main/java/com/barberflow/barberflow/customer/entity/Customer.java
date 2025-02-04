@@ -20,7 +20,7 @@ public class Customer {
     private String email;
     private String password;
     private String phoneNumber;
-    private LocalDateTime creationDate;
+    private final LocalDateTime creationDate = LocalDateTime.now();
     //private List<Appointment> appointments;
 
     public Customer(){}
@@ -30,7 +30,6 @@ public class Customer {
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
-        this.creationDate = LocalDateTime.now();
     }
 
     public Long getId() {

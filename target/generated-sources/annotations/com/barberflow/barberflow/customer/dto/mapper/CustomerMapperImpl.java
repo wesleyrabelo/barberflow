@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-02-03T14:09:19-0300",
+    date = "2025-02-04T15:34:04-0300",
     comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.5 (Oracle Corporation)"
 )
 @Component
@@ -24,12 +24,17 @@ public class CustomerMapperImpl implements CustomerMapper {
             return null;
         }
 
-        Customer customer = new Customer();
+        String name = null;
+        String email = null;
+        String password = null;
+        String phoneNumber = null;
 
-        customer.setName( dto.name );
-        customer.setEmail( dto.email );
-        customer.setPassword( dto.password );
-        customer.setPhoneNumber( dto.phoneNumber );
+        name = dto.name;
+        email = dto.email;
+        password = dto.password;
+        phoneNumber = dto.phoneNumber;
+
+        Customer customer = new Customer( name, email, password, phoneNumber );
 
         return customer;
     }
@@ -45,6 +50,7 @@ public class CustomerMapperImpl implements CustomerMapper {
         customerSignupResponseDto.id = customer.getId();
         customerSignupResponseDto.name = customer.getName();
         customerSignupResponseDto.email = customer.getEmail();
+        customerSignupResponseDto.creationDate = customer.getCreationDate();
 
         return customerSignupResponseDto;
     }
@@ -99,6 +105,7 @@ public class CustomerMapperImpl implements CustomerMapper {
         customerFindByIdResponseDto.email = customer.getEmail();
         customerFindByIdResponseDto.password = customer.getPassword();
         customerFindByIdResponseDto.phoneNumber = customer.getPhoneNumber();
+        customerFindByIdResponseDto.creationDate = customer.getCreationDate();
 
         return customerFindByIdResponseDto;
     }
@@ -115,6 +122,7 @@ public class CustomerMapperImpl implements CustomerMapper {
         customerFindByNameResponseDto.email = customer.getEmail();
         customerFindByNameResponseDto.password = customer.getPassword();
         customerFindByNameResponseDto.phoneNumber = customer.getPhoneNumber();
+        customerFindByNameResponseDto.creationDate = customer.getCreationDate();
 
         return customerFindByNameResponseDto;
     }

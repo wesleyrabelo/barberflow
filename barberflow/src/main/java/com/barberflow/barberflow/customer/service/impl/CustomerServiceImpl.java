@@ -10,6 +10,7 @@ import com.barberflow.barberflow.customer.dto.update.CustomerUpdateResponseDto;
 import com.barberflow.barberflow.customer.entity.Customer;
 import com.barberflow.barberflow.customer.repository.CustomerRepository;
 import com.barberflow.barberflow.customer.service.CustomerService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,7 +55,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerFindByIdResponseDto findById(Long id) {
         Customer saved = customerRepository.findById(id).orElseThrow(
-                RuntimeException::new
+                () -> new EntityNotFoundException(String.format("Customer with id: %d not found", id))
         );
         return mapper.customerToCustomerFindByIdResponseDto(saved);
     }
@@ -67,7 +68,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     private Customer internalFindById(Long id){
         return customerRepository.findById(id).orElseThrow(
-                RuntimeException::new
+                () -> new EntityNotFoundException(String.format("Customer with id: %d not found", id))
         );
     }
 }

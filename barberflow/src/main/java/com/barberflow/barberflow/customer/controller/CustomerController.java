@@ -2,22 +2,18 @@ package com.barberflow.barberflow.customer.controller;
 
 import com.barberflow.barberflow.customer.dto.find.CustomerFindByIdResponseDto;
 import com.barberflow.barberflow.customer.dto.find.CustomerFindByNameResponseDto;
-import com.barberflow.barberflow.customer.dto.mapper.CustomerMapper;
 import com.barberflow.barberflow.customer.dto.signup.CustomerSignupReceiveDto;
 import com.barberflow.barberflow.customer.dto.signup.CustomerSignupResponseDto;
 import com.barberflow.barberflow.customer.dto.update.CustomerUpdateReceiveDto;
 import com.barberflow.barberflow.customer.dto.update.CustomerUpdateResponseDto;
-import com.barberflow.barberflow.customer.entity.Customer;
 import com.barberflow.barberflow.customer.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 //TO-DO :
-// Criar DTO,
 // Adicionar RestControllerAdvice
 // Pagination
-// Passar a parte de conversão de DTO para o customerService?
 
 @RestController
 @RequestMapping("/customer")

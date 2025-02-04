@@ -54,20 +54,22 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerFindByIdResponseDto findById(Long id) {
         Customer saved = customerRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException(String.format("Customer with id: %d not found", id))
+                () -> new EntityNotFoundException(String.format("Customer with id: '%d' not found", id))
         );
         return mapper.customerToCustomerFindByIdResponseDto(saved);
     }
 
     @Override
     public CustomerFindByNameResponseDto findByName(String name) {
-        Customer customer = customerRepository.findByName(name).orElse(null);
+        Customer customer = customerRepository.findByName(name).orElseThrow(
+                () -> new EntityNotFoundException(String.format("Customer with name: '%s' not found", name))
+        );
         return mapper.customerToCustomerFindByNameResponseDto(customer);
     }
 
     private Customer internalFindById(Long id){
         return customerRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException(String.format("Customer with id: %d not found", id))
+                () -> new EntityNotFoundException(String.format("Customer with id: '%d' not found", id))
         );
     }
 }

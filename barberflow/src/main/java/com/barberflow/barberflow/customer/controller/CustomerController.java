@@ -7,6 +7,7 @@ import com.barberflow.barberflow.customer.dto.signup.CustomerSignupResponseDto;
 import com.barberflow.barberflow.customer.dto.update.CustomerUpdateReceiveDto;
 import com.barberflow.barberflow.customer.dto.update.CustomerUpdateResponseDto;
 import com.barberflow.barberflow.customer.service.CustomerService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,8 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<CustomerSignupResponseDto> signupCustomer(@RequestBody CustomerSignupReceiveDto dto){
+    public ResponseEntity<CustomerSignupResponseDto> signupCustomer(
+            @Valid @RequestBody CustomerSignupReceiveDto dto){
         return ResponseEntity.ok().body(customerService.saveCustomer(dto));
     }
 

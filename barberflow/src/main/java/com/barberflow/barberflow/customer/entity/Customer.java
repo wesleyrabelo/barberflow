@@ -1,9 +1,10 @@
 package com.barberflow.barberflow.customer.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.annotation.Nullable;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDateTime;
 
@@ -16,10 +17,21 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank(message = "Nome não pode ser vazio ou nulo")
+    @Size(min = 6, max = 20, message = "Tamanho do nome deve ser entre 6 e 20 caracteres")
+    @Pattern(regexp = "^[a-zA-Z ,.'-]+$", message = "Nome deve conter somente letras")
     private String name;
+    @Column(unique = true)
+    @NotBlank(message = "Email não pode ser vazio ou nulo")
+    @Pattern(regexp = "^[a-z0-9.]+@[a-z0-9]+\\.[a-z]+(\\.[a-z]+)?$", message = "Deve ser um email válido")
     private String email;
+    @Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", message = "Senha inválida")
     private String password;
+    @Column(unique = true)
+    @Nullable
+    @Pattern(regexp = "^[1-9][1-9][0-9]{9}$", message = "Número de telefone inválido")
     private String phoneNumber;
+    @Column(updatable = false)
     private final LocalDateTime creationDate = LocalDateTime.now();
     //private List<Appointment> appointments;
 

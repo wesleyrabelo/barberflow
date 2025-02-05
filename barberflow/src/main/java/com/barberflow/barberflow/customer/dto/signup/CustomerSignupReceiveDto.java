@@ -1,5 +1,6 @@
 package com.barberflow.barberflow.customer.dto.signup;
 
+import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -17,12 +18,16 @@ public class CustomerSignupReceiveDto {
     @Size(max = 15, message = "Tamanho máximo é 15 caracteres")
     @Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", message = "Senha inválida")
     public String password;
+    @Nullable
+    @Pattern(regexp = "^[1-9][1-9][0-9]{9}$", message = "Número de telefone inválido")
     public String phoneNumber;
 
     public CustomerSignupReceiveDto(String name, String email, String password, String phoneNumber) {
         this.name = name.trim();
         this.email = email.trim();
         this.password = password;
-        this.phoneNumber = phoneNumber.trim();
+        if(phoneNumber != null){
+            this.phoneNumber = phoneNumber.trim();
+        };
     }
 }

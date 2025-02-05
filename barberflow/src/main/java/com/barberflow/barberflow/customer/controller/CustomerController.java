@@ -29,7 +29,7 @@ public class CustomerController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CustomerUpdateResponseDto> updateCustomer(@PathVariable Long id, @RequestBody CustomerUpdateReceiveDto dto){
+    public ResponseEntity<CustomerUpdateResponseDto> updateCustomer(@PathVariable Long id, @Valid @RequestBody CustomerUpdateReceiveDto dto){
         return ResponseEntity.ok().body(customerService.updateCustomer(id, dto));
     }
 

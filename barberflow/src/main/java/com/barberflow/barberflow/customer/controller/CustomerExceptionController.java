@@ -2,12 +2,14 @@ package com.barberflow.barberflow.customer.controller;
 
 import com.barberflow.barberflow.customer.exception.CustomerExceptionResponse;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -40,4 +42,32 @@ public class CustomerExceptionController {
                     )
         );
     }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<CustomerExceptionResponse> constraintViolationException(ConstraintViolationException exception){
+        return ResponseEntity
+                .badRequest()
+                .body(
+                        new CustomerExceptionResponse(
+                                exception.getClass().getSimpleName(),
+                                exception.getLocalizedMessage(),
+                                LocalDateTime.now(),
+                                HttpStatus.BAD_REQUEST
+                        )
+                );
+    }
+
+    @ExceptionHandler(SQLException.class)
+   public ResponseEntity<CustomerExceptionResponse> psqlException(SQLException exception){
+        return ResponseEntity
+                .badRequest()
+                .body(
+                        new CustomerExceptionResponse(
+                                exception.getClass().getSimpleName(),
+                                exception.getMessage(),
+                                LocalDateTime.now(),
+                                HttpStatus.BAD_REQUEST
+                        )
+                );
+   }
 }

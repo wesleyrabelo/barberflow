@@ -10,6 +10,8 @@ public class CustomerSignupReceiveDto {
     @Size(min = 6, max = 20, message = "Tamanho do nome deve ser entre 6 e 20 caracteres")
     @Pattern(regexp = "^[a-zA-Z ,.'-]+$", message = "Nome deve conter somente letras")
     public String name;
+    @NotBlank(message = "Email não pode ser vazio ou nulo")
+    @Pattern(regexp = "^[a-z0-9.]+@[a-z0-9]+\\.[a-z]+(\\.[a-z]+)?$", message = "Deve ser um email válido")
     public String email;
     public String password;
     public String phoneNumber;

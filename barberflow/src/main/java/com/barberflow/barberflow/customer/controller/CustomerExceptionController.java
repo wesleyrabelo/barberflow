@@ -13,6 +13,7 @@ import java.util.Objects;
 
 @RestControllerAdvice("com.barberflow.barberflow.customer")
 public class CustomerExceptionController {
+
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<CustomerExceptionResponse> entityNotFoundException(EntityNotFoundException exception){
         return ResponseEntity

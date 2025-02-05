@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Size;
 public class CustomerSignupReceiveDto {
     @NotBlank(message = "Nome não pode ser vazio ou nulo")
     @Size(min = 6, max = 20, message = "Tamanho do nome deve ser entre 6 e 20 caracteres")
-    @Pattern(regexp = "^[a-z ,.'-]+$", message = "Nome deve conter somente letras")
+    @Pattern(regexp = "^[a-zA-Z ,.'-]+$", message = "Nome deve conter somente letras")
     public String name;
     public String email;
     public String password;

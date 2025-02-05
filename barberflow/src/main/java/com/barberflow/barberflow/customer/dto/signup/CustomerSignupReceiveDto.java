@@ -13,6 +13,9 @@ public class CustomerSignupReceiveDto {
     @NotBlank(message = "Email não pode ser vazio ou nulo")
     @Pattern(regexp = "^[a-z0-9.]+@[a-z0-9]+\\.[a-z]+(\\.[a-z]+)?$", message = "Deve ser um email válido")
     public String email;
+    @NotBlank(message = "Senha não pode ser vazia ou nula")
+    @Size(max = 15, message = "Tamanho máximo é 15 caracteres")
+    @Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", message = "Senha inválida")
     public String password;
     public String phoneNumber;
 

@@ -9,7 +9,6 @@ import jakarta.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 //TO-DO:
-//  Adicionar as restricoes para cada campo
 //  Criar a classe Appointment
 
 @Entity
@@ -34,7 +33,6 @@ public class Customer {
     @Column(updatable = false)
     private final LocalDateTime creationDate = LocalDateTime.now();
     //private List<Appointment> appointments;
-
     public Customer(){}
 
     public Customer(String name, String email, String password, String phoneNumber) {

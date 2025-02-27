@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-02-04T15:34:04-0300",
+    date = "2025-02-12T17:29:29-0300",
     comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.5 (Oracle Corporation)"
 )
 @Component
@@ -24,17 +24,12 @@ public class CustomerMapperImpl implements CustomerMapper {
             return null;
         }
 
-        String name = null;
-        String email = null;
-        String password = null;
-        String phoneNumber = null;
+        Customer customer = new Customer();
 
-        name = dto.name;
-        email = dto.email;
-        password = dto.password;
-        phoneNumber = dto.phoneNumber;
-
-        Customer customer = new Customer( name, email, password, phoneNumber );
+        customer.setName( dto.name );
+        customer.setEmail( dto.email );
+        customer.setPassword( dto.password );
+        customer.setPhoneNumber( dto.phoneNumber );
 
         return customer;
     }

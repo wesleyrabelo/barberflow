@@ -28,12 +28,26 @@ public class CustomerRepositoryTest {
     }
 
     @Test
-    void findByName_returnSavedCustomer(){
+    void findByName_existingUsername_returnSavedCustomer(){
         Customer saved = repository.findByName("john doe").orElse(null);
 
         Assertions.assertThat(saved.getId()).isEqualTo(1L);
         Assertions.assertThat(saved.getName()).isEqualTo("john doe");
         Assertions.assertThat(saved.getPassword()).isEqualTo("12345678aA!");
         Assertions.assertThat(saved.getPhoneNumber()).isEqualTo("12121212121");
+    }
+
+    @Test
+    void findByName_notExistingUsername_returnNull(){
+        Customer saved = repository.findByName("not existing").orElse(null);
+
+        Assertions.assertThat(saved).isNull();
+    }
+
+    @Test
+    void findByName_nullInput_returnNull(){
+        Customer saved = repository.findByName(null).orElse(null);
+
+        Assertions.assertThat(saved).isNull();
     }
 }

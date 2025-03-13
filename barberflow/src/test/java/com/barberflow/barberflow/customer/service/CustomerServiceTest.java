@@ -111,4 +111,13 @@ public class CustomerServiceTest {
 
         assertThrows(EntityNotFoundException.class, () -> service.updateCustomer(1L, receiveDto));
     }
+
+    @Test
+    void deleteCustomer_existingCustomer_returnVoid(){
+        Mockito.when(repository.findById(1L)).thenReturn(Optional.of(Mockito.mock(Customer.class)));
+
+        service.deleteCustomer(1L);
+
+        Mockito.verify(repository).deleteById(1L);
+    }
 }

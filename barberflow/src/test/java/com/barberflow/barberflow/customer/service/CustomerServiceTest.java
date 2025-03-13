@@ -8,6 +8,7 @@ import com.barberflow.barberflow.customer.dto.update.CustomerUpdateResponseDto;
 import com.barberflow.barberflow.customer.entity.Customer;
 import com.barberflow.barberflow.customer.repository.CustomerRepository;
 import com.barberflow.barberflow.customer.service.impl.CustomerServiceImpl;
+import jakarta.persistence.EntityNotFoundException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,6 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest
@@ -66,7 +69,7 @@ public class CustomerServiceTest {
     }
 
     @Test
-    void updateCustomer_existingCustomerUpdateReceiveDto_CustomerUpdateResponseDto(){
+    void updateCustomer_existingCustomerUpdateReceiveDto_returnCustomerUpdateResponseDto(){
         Customer savedCustomer = new Customer(
                 "john doe",
                 "john@email.com",
@@ -98,5 +101,14 @@ public class CustomerServiceTest {
                 .hasFieldOrPropertyWithValue("name", "updated updated")
                 .hasFieldOrPropertyWithValue("email", "update@email.com")
                 .hasFieldOrPropertyWithValue("phoneNumber", "333333333");
+    }
+
+    @Test
+    void updateCustomer_inexistingCustomer_throwEntityNotFoundException(){
+        CustomerUpdateReceiveDto receiveDto = new CustomerUpdateReceiveDto();
+
+        Mockito.when(repository.findById(1L)).thenThrow(new EntityNotFoundException());
+
+        assertThrows(EntityNotFoundException.class, () -> service.updateCustomer(1L, receiveDto));
     }
 }

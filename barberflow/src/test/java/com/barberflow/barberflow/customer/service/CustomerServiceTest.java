@@ -106,7 +106,7 @@ public class CustomerServiceTest {
     }
 
     @Test
-    void updateCustomer_inexistingCustomer_throwEntityNotFoundException(){
+    void updateCustomer_inexistentCustomer_throwEntityNotFoundException(){
         Mockito.when(repository.findById(1L)).thenThrow(new EntityNotFoundException());
 
         assertThrows(EntityNotFoundException.class, () -> service.updateCustomer(1L, Mockito.mock(CustomerUpdateReceiveDto.class)));
@@ -122,7 +122,7 @@ public class CustomerServiceTest {
     }
 
     @Test
-    void deleteCustomer_inexistingCustomer_throwEntityNotFoundException(){
+    void deleteCustomer_inexistentCustomer_throwEntityNotFoundException(){
         Mockito.when(repository.findById(1L)).thenThrow(new EntityNotFoundException());
 
         assertThrows(EntityNotFoundException.class, () -> service.deleteCustomer(1L));

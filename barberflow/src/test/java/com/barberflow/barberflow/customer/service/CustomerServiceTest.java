@@ -1,5 +1,6 @@
 package com.barberflow.barberflow.customer.service;
 
+import com.barberflow.barberflow.customer.dto.find.CustomerFindByIdResponseDto;
 import com.barberflow.barberflow.customer.dto.mapper.CustomerMapper;
 import com.barberflow.barberflow.customer.dto.signup.CustomerSignupReceiveDto;
 import com.barberflow.barberflow.customer.dto.signup.CustomerSignupResponseDto;
@@ -22,6 +23,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Optional;
 
+import static java.util.function.Predicate.not;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
@@ -105,11 +107,9 @@ public class CustomerServiceTest {
 
     @Test
     void updateCustomer_inexistingCustomer_throwEntityNotFoundException(){
-        CustomerUpdateReceiveDto receiveDto = new CustomerUpdateReceiveDto();
-
         Mockito.when(repository.findById(1L)).thenThrow(new EntityNotFoundException());
 
-        assertThrows(EntityNotFoundException.class, () -> service.updateCustomer(1L, receiveDto));
+        assertThrows(EntityNotFoundException.class, () -> service.updateCustomer(1L, Mockito.mock(CustomerUpdateReceiveDto.class)));
     }
 
     @Test
@@ -119,5 +119,33 @@ public class CustomerServiceTest {
         service.deleteCustomer(1L);
 
         Mockito.verify(repository).deleteById(1L);
+    }
+
+    @Test
+    void deleteCustomer_inexistingCustomer_throwEntityNotFoundException(){
+        Mockito.when(repository.findById(1L)).thenThrow(new EntityNotFoundException());
+
+        assertThrows(EntityNotFoundException.class, () -> service.deleteCustomer(1L));
+    }
+
+    @Test
+    void findById_existingCustomer_returnCustomerFindByIdResponseDto(){
+        Customer savedCustomer = new Customer(
+                "john doe",
+                "john@email.com",
+                "12345678aA!",
+                "12121212121"
+        );
+        savedCustomer.setId(1L);
+
+        Mockito.when(repository.findById(1L)).thenReturn(Optional.of(savedCustomer));
+
+        CustomerFindByIdResponseDto customer = service.findById(1L);
+
+        Assertions.assertThat(customer)
+                .hasFieldOrPropertyWithValue("name", "john doe")
+                .hasFieldOrPropertyWithValue("email", "john@email.com" )
+                .hasFieldOrPropertyWithValue("phoneNumber", "12121212121")
+                .extracting("creationDate").isNotNull();
     }
 }

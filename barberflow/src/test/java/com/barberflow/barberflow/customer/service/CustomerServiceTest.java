@@ -3,12 +3,12 @@ package com.barberflow.barberflow.customer.service;
 import com.barberflow.barberflow.customer.dto.mapper.CustomerMapper;
 import com.barberflow.barberflow.customer.dto.signup.CustomerSignupReceiveDto;
 import com.barberflow.barberflow.customer.dto.signup.CustomerSignupResponseDto;
+import com.barberflow.barberflow.customer.dto.update.CustomerUpdateReceiveDto;
+import com.barberflow.barberflow.customer.dto.update.CustomerUpdateResponseDto;
 import com.barberflow.barberflow.customer.entity.Customer;
 import com.barberflow.barberflow.customer.repository.CustomerRepository;
 import com.barberflow.barberflow.customer.service.impl.CustomerServiceImpl;
 import org.assertj.core.api.Assertions;
-import org.checkerframework.checker.units.qual.C;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,6 +18,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest
@@ -56,7 +58,45 @@ public class CustomerServiceTest {
         Mockito.when(repository.save(Mockito.any(Customer.class))).thenReturn(savedCustomer);
 
         CustomerSignupResponseDto savedDto = service.saveCustomer(dto);
-        Assertions.assertThat(savedDto.id).isEqualTo(1L);
-        Assertions.assertThat(savedDto.email).isEqualTo("john@email.com");
+
+        Assertions.assertThat(savedDto)
+                .hasFieldOrPropertyWithValue("id", 1L)
+                .hasFieldOrPropertyWithValue("name", "john doe")
+                .hasFieldOrPropertyWithValue("email", "john@email.com");
+    }
+
+    @Test
+    void updateCustomer_existingCustomerUpdateReceiveDto_CustomerUpdateResponseDto(){
+        Customer savedCustomer = new Customer(
+                "john doe",
+                "john@email.com",
+                "12345678aA!",
+                "12121212121"
+        );
+        savedCustomer.setId(1L);
+
+        CustomerUpdateReceiveDto receiveDto = new CustomerUpdateReceiveDto();
+        receiveDto.name = "updated updated";
+        receiveDto.email = "update@email.com";
+        receiveDto.password = "Updated123@";
+        receiveDto.phoneNumber = "333333333";
+
+        Customer updatedCustomer = new Customer(
+                "updated updated",
+                "update@email.com",
+                "Updated123@",
+                "333333333"
+        );
+        updatedCustomer.setId(1L);
+
+        Mockito.when(repository.findById(1L)).thenReturn(Optional.of(savedCustomer));
+        Mockito.when(repository.save(Mockito.any(Customer.class))).thenReturn(updatedCustomer);
+
+        CustomerUpdateResponseDto customer = service.updateCustomer(1L, receiveDto);
+
+        Assertions.assertThat(customer)
+                .hasFieldOrPropertyWithValue("name", "updated updated")
+                .hasFieldOrPropertyWithValue("email", "update@email.com")
+                .hasFieldOrPropertyWithValue("phoneNumber", "333333333");
     }
 }
